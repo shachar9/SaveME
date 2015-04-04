@@ -1,21 +1,23 @@
+import sys
+import os.path as path
 import web
 import urlparse
 import json
 import saveme
 from saveme import StorylineProcessor
-        
+
+basePath = path.dirname(path.abspath(__file__))
+
 urls = (
 	'/hello/(.*)', 'hello',
 	'/', 'home',
 	'/go', 'Go'
 )
 
-app = web.application(urls, globals())
-
-render = web.template.render('templates')
+render = web.template.render(path.join(basePath, 'templates'))
 
 class hello:        
-	def GET(self, name):
+	def GET(self, name):		
 		return render.index(name)
 
 class home:        
@@ -29,6 +31,9 @@ class Go:
 		web.header('Content-Type', 'application/json')
 		return json.dumps(resp);
 
+application = web.application(urls, globals()).wsgifunc()
+
 if __name__ == "__main__":
+	app = web.application(urls, globals())
 	app.run()
 
