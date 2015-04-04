@@ -14,9 +14,9 @@ from beaker.util import parse_cache_config_options
 
 LAST_STATE = SCENES_GENERATED
 
-scenesBasePath = '/home/shachar/Images/scenes'
+scenesBasePath = './resources/scenes'
 
-basePath = '/home/shachar/projects/SaveME'
+basePath = '.'
 cacheBasePath = path.join(basePath, 'cache')
 storyBasePath = path.join(basePath, 'view/story')
 

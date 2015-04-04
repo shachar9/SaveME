@@ -41,7 +41,7 @@ def loadFaceFromImage(imagePath):
 	image = cv2.imread(imagePath)
 	return crop(image, *face)
 
-cascPath = '/home/shachar/OpenCV/opencv-2.4.9/data/haarcascades/haarcascade_frontalface_default.xml'
+cascPath = './resources/haarcascade_frontalface_default.xml'
 
 
 def drawRectangles(image, faces):
