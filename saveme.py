@@ -6,6 +6,7 @@ import threading
 import fb_helper
 import image_helper
 import sys
+import logging
 from retrying import retry
 from beaker.cache import CacheManager
 from beaker.util import parse_cache_config_options
@@ -99,7 +100,7 @@ def go(fb_access_token):
 	try:
 		sp.start(fb_access_token)
 	except Exception as e: 
-		print "Error ", e, sp
+		logging.error("Story start error: %s. %s", e, sp)
 		return { 'status': -1 }
 	pId = sp.getId()
 	#latestSP = loadLatestSP(pId)
@@ -110,10 +111,10 @@ def go(fb_access_token):
 		saveToCache(pId, sp)
 	res = { 'status': sp.state }
 	if sp.state == LAST_STATE:
-		print "Everythings baked for id %s" % pId
+		logging.info("Everythings baked for id %s", pId)
 		res['images'] = sp.generated_images_paths
 	elif not sp.running:
-		print "Start new thread for id %s" % pId
+		logging.info("Start new thread for id %s", pId)
 		threading.Thread(target=runSP, args=[sp, fb_access_token]).start()
 	return res
 
@@ -127,20 +128,20 @@ def getFromCache(pId):
 
 def runSP(sp, fb_access_token):
 	sp.running = True
-	print "Running for step %d." % sp.state
+	logging.info("Running for step %d.", sp.state)
 	try:
 		result = stepPerState[sp.state](sp, fb_access_token)
 	except Exception as e:
-		print "Error ", e, sp
+		logging.error("Story phase error: %s. %s", e, sp)
 		sp.running = False
 		return
-	print "Done %d." % sp.state
+	logging.info("Done %d. %s.", sp.state, sp)
 	if sp.state in (IMAGES_SOURCES_READY, FACES_DATA_READY, LAST_STATE):
 		persist(sp)
 	if sp.state < LAST_STATE:
 		runSP(sp, fb_access_token)
 	else:
-		print "Finito running"
+		logging.info("Finito running %s.", sp)
 		sp.running = False
 
 def loadLatestSP(user_id):
@@ -155,7 +156,7 @@ def loadLatestSP(user_id):
 		return None
 	sp = loadSP(cache_files[0])
 	sp.running = False
-	print "Loaded SP from cache %s" % user_id
+	logging.info("Loaded SP from cache %s.", user_id)
 	#storyProcessorsCache[user_id] = sp
 	return sp
 
@@ -170,10 +171,10 @@ def persist(sp):
 		with open(ncacheFilePath, 'w') as f:
 			 pickle.dump(sp, f)
 	except Exception as e:
-		print "Error persisting SP.", e, sp
+		logger.error("Error persisting SP. %s. %s", e, sp)
 
 def loadSP(datFile):
-	print 'loading ' + datFile
+	logging.info("Loading %s.", datFile)
 	with open(datFile,'r') as f:
 		sp = pickle.load(f)
 	return sp

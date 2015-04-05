@@ -3,6 +3,9 @@ import os.path as path
 import web
 import urlparse
 import json
+import logging
+logging.basicConfig(level=logging.INFO)
+
 import saveme
 from saveme import StorylineProcessor
 
@@ -34,6 +37,8 @@ class Go:
 application = web.application(urls, globals()).wsgifunc()
 
 if __name__ == "__main__":
+	logging.info('Main')
+
 	app = web.application(urls, globals())
 	app.run()
 
