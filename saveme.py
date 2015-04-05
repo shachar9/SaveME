@@ -55,9 +55,11 @@ class StorylineProcessor():
 
 	@retry(stop_max_attempt_number=5)
 	def retrievePhotosData(self):
-		user_files_details = [(p, fb_helper.retrieveImage(p)) for p in self.photos_sources[:75]]
+		user_files_details = [(p, fb_helper.retrieveImage(p)) for p in self.photos_sources[:50]]
 		user_faces_images = [image_helper.cropFaceFromImageDetails(*im) for im in user_files_details]
 		self.user_faces_images = [im for im in user_faces_images if im != None]
+		if len(self.user_faces_images) == 0:
+			raise Exception("Didn't find any photos of you.")
 		self.__setState(FACES_DATA_READY)
 
 	def chooseScenesParams(self):
@@ -171,7 +173,7 @@ def persist(sp):
 		with open(ncacheFilePath, 'w') as f:
 			 pickle.dump(sp, f)
 	except Exception as e:
-		logger.error("Error persisting SP. %s. %s", e, sp)
+		logging.error("Error persisting SP. %s. %s", e, sp)
 
 def loadSP(datFile):
 	logging.info("Loading %s.", datFile)
