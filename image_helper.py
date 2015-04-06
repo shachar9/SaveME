@@ -24,9 +24,12 @@ def recognizeFaces(image):
 def saveImage(imagePath, image):
 	return cv2.imwrite(imagePath, image)
 
-def saveFace(imagePath, faces):
+def saveFace(imagePath, face):
 	with open(doCoordsFilePath(imagePath),'w') as f:
 	    pickle.dump(face, f)
+
+def saveSubImage(imagePath, image, ext='face'):
+	cv2.imwrite(doImageFilePath(imagePath, ext), image)
 
 def loadFace(imagePath):
 	with open(doCoordsFilePath(imagePath),'r') as f:
@@ -99,6 +102,21 @@ def cropFaceFromImageDetails(photo_det, imageFile):
 		return crop(image, *face) if face != None else None
 	except:
 		return None
+
+###
+#scene = cv2.imread(scenePath)
+#faces = recognizeFaces(scene)
+#show(drawRectangles(scene, faces))
+#saveFace(scenePath, face)
+#faceImg = loadFaceFromImage(scenePath)
+#saveSubImage(scenePath, faceImg)
+
+#import saveme
+#sp = saveme.loadSP('/home/shachar/git/SaveME/cache/?')
+#user_faces_map = { i : img for i, img in enumerate(self.user_faces_images) }
+#image_helper.sortByHistogram(faceImg, user_faces_map)[:3]
+#v = placeFaceInScene(scenePath, self.user_faces_images[?])
+###
 
 #image = cv2.imread(imagePath)
 #(h, w) = image.shape[:2]
