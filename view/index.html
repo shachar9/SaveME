@@ -1,0 +1,122 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width = 1050, user-scalable = no" />
+<script type="text/javascript" src="scripts/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="scripts/modernizr.2.5.3.min.js"></script>
+</head>
+<body style="background-image:url(pics/bg.jpg)">
+
+<div class="flipbook-viewport">
+	<div class="container">
+		<div class="flipbook">
+			<div class="hard" style="background-image:url(pics/WEDDING-002.jpg)">
+			</div>
+			<div class="hard" style="background-image:url(pics/back1.jpg)">
+				<img class="myimg" src="pics/wedding-photobomb3.jpg" />
+			</div>
+			<div class="hard" style="background-image:url(pics/back1.jpg)">
+				<span class="phototext">אז מה לא תבואו לחתונה<br>???</span>
+			</div>
+			<div class="hard" style="background-image:url(pics/back1.jpg)">
+				<img class="myimg" src="pics/wedding-photobomb1.jpg" />
+			</div>
+			<div class="hard" style="background-image:url(pics/back1.jpg)">
+				<span class="phototext">אנחנו מכירים מאות אם לא אלפי שנים</span>
+			</div>
+			<!--<div class="hard" style="background-image:url(pics/WEDDING-001.jpg)"></div>-->
+			<div id="front_cover" class="hard" style="background-image:url(pics/album_cover.jpg)">		
+				<div id="cover_header_pic" style="width: 100%; height: 40%;">
+					<div style="width: 40%; height: 70%; margin-left: 27%; padding-top: 7.5%;">
+						<img id="front_img" src="pics/mexican-party-us.jpg" style="width: 100%; height: 100%;" />
+					</div>
+				</div>
+				
+				<div id="cover_text" style="height: 42%; width: 52%; margin-left: 22%; margin-top: 4.5%;">
+					<div id="explanation_text">
+						<div id="fc_title" style="width: 100%; font-size:24px; text-align: center;">
+							<span class="formal_type">
+							ברוכים הבאים לאלבום התמונות
+								<br>
+							 #%#$% של רונית שחר ו
+								</span>
+						</div>
+						<div id="fc_remindme" style="font-size: 14px; text-align: right; width: 95%; margin-top: 2%;">
+							<span class="formal_type">
+							(??? רק תזכיר/י לי בבקשה מי את/ה)
+							</span>
+						</div>
+					</div>
+					<div id="connect" style="width: 100%; margin-top: 2%;">
+						<div id="connect_exp">
+							<div id="connect_txt" style="font-size: 18px; text-align: right; width: 95%; margin-top: 19%;">
+								<span class="formal_type">
+										הכנו לך הפתעה קטנה. תאשר אותנו בפייסבוק.
+								</span>
+							</div>
+							<div id="connect_img" style="margin-top: 2%; width:50%; margin-top:-8%;">
+								<img src="pics/connect_fb.png" style="width: 100%; height: 100%;" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+$('.flipbook-viewport').hide()
+
+function loadApp() {
+
+	// Create the flipbook
+
+	$('.flipbook').turn({
+			// Width
+
+			width:1600,
+			
+			// Height
+
+			height:600,
+
+			// Elevation
+
+			elevation: 50,
+			
+			// Enable gradients
+
+			gradients: true,
+			
+			// Auto center this flipbook
+
+			autoCenter: true,
+
+			page: 6
+
+	});
+	$('.flipbook-viewport').show()
+}
+
+// Load the HTML4 version if there's not CSS transform
+
+yepnope({
+	test : Modernizr.csstransforms,
+	yep: ['scripts/turn.js'],
+	nope: ['scripts/turn.html4.min.js'],
+	both: ['css/basic.css'],
+	complete: loadApp
+});
+
+</script>
+
+</body>
+</html>
