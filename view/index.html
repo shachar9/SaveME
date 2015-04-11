@@ -26,13 +26,13 @@
 			</div>
 		</div>
 		
-		<div id="cover_text">
+		<div id="cover_text_login" class="cover_text">
 			<div id="explanation_text">
 				<div id="fc_title">
 					<span class="formal_type">
 					ברוכים הבאים לאלבום התמונות
 						<br>
-					 #%#$% של רונית שחר ו
+					 #%#$% של רונית, שחר ו
 						</span>
 				</div>
 				<div id="fc_remindme">
@@ -53,6 +53,53 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id="cover_text_progress" class="cover_text">
+			<div id="explanation_text">
+				<div id="fc_title">
+					<span class="formal_type">
+					ברוכים הבאים לאלבום התמונות
+						<br>
+					 ...של רונית, שחר ו
+					</span>
+					<span id="userFirstName">
+				 	</span>
+				</div>
+			</div>
+			<div id="baking">
+				<div id="bake_status">
+					<div id="bake_status_words">
+						<span id="bakeStatusSpan" class="formal_type">
+						</span>
+					</div>
+					<div id="bake_progress">
+						<span id="controlButton" data-loading="...מחטט" data-finished="הכל טוב"  class="progress-button">
+						...מחטט
+							<span style="width: 100%;" class="tz-bar background-horizontal"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="bakingStatusTexts">
+			<div id="bakingStatuses_1">
+				<span>בטוח שאנחנו מכירים?</span>
+				<span>נראה לי טעות...</span>
+			</div>
+			<div id="bakingStatuses_2">
+				<span>...אה בטח אנחנו מכירים מהזה.. נו</span>
+				<span>?אולי היינו ביחד בחוג קפוארה</span>
+				<span>תן לי דקה אני אזכר</span>				
+			</div>	
+			<div id="bakingStatuses_3">
+				<span>..אה נו נזכרתי... בעצם לא</span>
+				<span>טוב נו בלי לחץ.. עד החתונה זה יעבור</span>
+				<span>דקה אני איתך</span>
+				<span>הגיע הזמן להחליף תמונת פרופיל</span>					
+			</div>
+			<div id="bakingStatuses_4">
+				<span>? איפה את/ה לא רואים אותך</span>
+			</div>									
 		</div>
 	</div>
 	
@@ -85,12 +132,13 @@
 	</div>
 </div>
 
+<!--<script src="scripts/progress.js" type="text/javascript"></script>-->
 <script src="scripts/saveme.js" type="text/javascript"></script>
 
 <script src="scripts/fb.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	rebuildApp({})
+	rebuildApp({}, 'login')	
 </script>
 
 </body>

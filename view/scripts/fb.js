@@ -31,26 +31,27 @@ function statusChangeCallback(response) {
  	// Full docs on the response object can be found in the documentation
  	// for FB.getLoginStatus().
  	if (response.status === 'connected') {
-   // Logged into your app and Facebook.
-   console.log(response.authResponse.accessToken);
-   testAPI(response.authResponse.accessToken);
+		// Logged into your app and Facebook.
+		console.log(response.authResponse.accessToken);
+		start(response.authResponse.accessToken);
  	} else if (response.status === 'not_authorized') {
    	// The person is logged into Facebook, but not your app.
-   	document.getElementById('status').innerHTML = 'Please log ' +
-     	'into this app.';
+   	console.log('User is not logged into the app.');
 	} else {
    	// The person is not logged into Facebook, so we're not sure if
    	// they are logged into this app or not.
-   	document.getElementById('status').innerHTML = 'Please log ' +
-     		'into Facebook.';
+   	console.log('User is not logged into the Facebook.');
 	}
 }	
 
 var auto_refresh = null;
-function testAPI(accessToken) {
+function start(accessToken) {
  	console.log('Welcome!  Fetching your information.... ');
  	FB.api('/me', function(response) {
    	console.log('Successful login for: ' + response.name);
+   	updateInitialDetails(response)
+   	rebuildApp({}, 'progress')
+   	
    	sample(accessToken, 
    		function() { 
    			console.log('Done');
@@ -81,8 +82,9 @@ function sample(accessToken, finishFunc, unfinishedFunc) {
 		dataType: 'json',
 		success: function(data) {
 			console.log(JSON.stringify(data));
+			updateStatus(data.status)
 			if (data.images) {
-				rebuildApp(data.images)		
+				rebuildApp(data.images, 'progress')		
 			}
 			if (data.status >= 5) {
 				return finishFunc()
