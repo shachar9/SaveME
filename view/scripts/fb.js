@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	console.log('jQuery works !!');
 	
@@ -7,6 +8,7 @@ $(document).ready(function() {
 	 appId      : '977141175653638',
 	 cookie     : true,  // enable cookies to allow the server to access 
 	                     // the session
+	 status  : true, // check login status
 	 xfbml      : true,  // parse social plugins on this page
 	 version    : 'v2.2' // use version 2.2
 	});     
@@ -48,59 +50,46 @@ var auto_refresh = null;
 function testAPI(accessToken) {
  	console.log('Welcome!  Fetching your information.... ');
  	FB.api('/me', function(response) {
-   console.log('Successful login for: ' + response.name);
-   document.getElementById('status').innerHTML =
-     'Thanks for logging in, ' + response.name + '!';
+   	console.log('Successful login for: ' + response.name);
+   	sample(accessToken, 
+   		function() { 
+   			console.log('Done');
+   			return true 
+   		},
+   		function() {
+   			auto_refresh = setInterval((function() {
+					return sample(accessToken,
+						function() { 
+							clearInterval(auto_refresh) 
+							console.log('Done');
+						},
+						function() { return false }
+					);
+				}), 5000);
+			}
+   	)
+   	
  	});
-	
-
-	auto_refresh = setInterval((function() {
-		return sample(accessToken);
-	}), 5000);
-
 }
 
-function sample(accessToken) {
+function sample(accessToken, finishFunc, unfinishedFunc) {
+	console.log('About to sample status.');
 	$.ajax({
 		type: 'POST',
-		url: 'app/go',
+		url: '../app/go',
 		data: { fb_token : accessToken },
 		dataType: 'json',
 		success: function(data) {
 			console.log(JSON.stringify(data));
-			document.getElementById('status').innerHTML =  'Status ' + data.status
 			if (data.images) {
-				buildAlbum(data.images)
-				loadPolaroid()
+				rebuildApp(data.images)		
 			}
 			if (data.status >= 5) {
-				clearInterval(auto_refresh)
+				return finishFunc()
+			} else {
+				return unfinishedFunc()
 			}
 		}
   });
 }
 
-function buildAlbum(images) {
-	var myAlbum = $('#pp_thumbContainer div.album')
-	myAlbum.empty()
-
-	for(image_id in images) {
-		contentTag = $('<div>')
-		contentTag.attr('class', 'content')
-		image = images[image_id]
-		imgTag = $('<img>')
-		imgTag.attr('alt', image)
-		imgTag.attr('src', image)
-		contentTag.append(imgTag)
-		spanTag = $('<span>')
-		spanTag.append(image_id)
-		contentTag.append(spanTag)
-		myAlbum.append(contentTag)
-	};
-
-	descrTag = $('<div>')
-	descrTag.attr('class', 'descr')
-	descrTag.append('Wedding Pics')
-	myAlbum.append(descrTag)
-	
-}

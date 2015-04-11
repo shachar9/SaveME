@@ -5,132 +5,92 @@
 <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width = 1050, user-scalable = no" />
-<script type="text/javascript" src="scripts/jquery.min.1.7.js"></script>
-<script type="text/javascript" src="scripts/modernizr.2.5.3.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width = 1050, user-scalable = no" />
+	<title>Ronit & Shachar - Save The Date</title>
+	<script type="text/javascript" src="scripts/jquery.min.1.7.js"></script>
+	<script type="text/javascript" src="scripts/modernizr.2.5.3.min.js"></script>
 </head>
 <body style="background-image:url(images/bg.jpg)">
 
 <div class="flipbook-viewport">
 	<div class="container">
-		<div class="flipbook">
-			<div class="hard" style="background-image:url(pics/WEDDING-002.jpg)">
+	</div>
+</div>
+
+<div id="book_pages" style="display: none;">	
+	<div id="front_cover_part">
+		<div id="cover_header_pic_wrapper">
+			<div id="cover_header_pic">
+				<img class="fill_img" src="pics/mexican-party-us.jpg" />
 			</div>
-			<div class="hard" style="background-color: #f2f5f7;">
-				<div class="img_wrapper">
-					<img class="myimg" src="pics/wedding-photobomb3.jpg" />
-					<div class="pp_descr">
-						<span>
-							מהחינה של אביגדור פלדמן. מרץ 1954
+		</div>
+		
+		<div id="cover_text">
+			<div id="explanation_text">
+				<div id="fc_title">
+					<span class="formal_type">
+					ברוכים הבאים לאלבום התמונות
+						<br>
+					 #%#$% של רונית שחר ו
+						</span>
+				</div>
+				<div id="fc_remindme">
+					<span class="formal_type">
+					(??? רק תזכיר/י לי בבקשה מי את/ה)
+					</span>
+				</div>
+			</div>
+			<div id="connect">
+				<div>
+					<div id="connect_txt">
+						<span class="formal_type">
+								הכנו לך הפתעה קטנה. תאשר אותנו בפייסבוק.
 						</span>
 					</div>
-				</div>
-			</div>
-			<div class="page" style="background-color: #f2f5f7;">
-				<span class="phototext">אז מה לא תבואו לחתונה<br>???</span>
-			</div>
-			<div class="page" style="background-color: #f2f5f7;">
-				<div class="img_wrapper">
-					<img class="myimg" src="pics/wedding-photobomb1.jpg" />
-					<div class="pp_descr">
-						<span>
-							מהחתונה של דורה. אוגוסט 2016.
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="hard" style="background-color: #f2f5f7;">
-				<span class="phototext">אנחנו מכירים מאות אם לא אלפי שנים</span>
-			</div>
-			
-			<!--<div class="hard" style="background-image:url(pics/WEDDING-001.jpg)"></div>-->
-			<div id="front_cover" class="hard" style="background-image:url(images/album_cover.jpg)">		
-				<div id="cover_header_pic" style="width: 100%; height: 40%;">
-					<div style="width: 40%; height: 70%; margin-left: 27%; padding-top: 7.5%; transform: rotate(5deg);">
-						<img id="front_img" src="pics/mexican-party-us.jpg" style="width: 100%; height: 100%;" />
-					</div>
-				</div>
-				
-				<div id="cover_text" style="height: 42%; width: 52%; margin-left: 22%; margin-top: 4.5%;">
-					<div id="explanation_text">
-						<div id="fc_title" style="width: 100%; font-size:24px; text-align: center;">
-							<span class="formal_type">
-							ברוכים הבאים לאלבום התמונות
-								<br>
-							 #%#$% של רונית שחר ו
-								</span>
-						</div>
-						<div id="fc_remindme" style="font-size: 14px; text-align: right; width: 95%; margin-top: 2%;">
-							<span class="formal_type">
-							(??? רק תזכיר/י לי בבקשה מי את/ה)
-							</span>
-						</div>
-					</div>
-					<div id="connect" style="width: 100%; margin-top: 2%;">
-						<div id="connect_exp">
-							<div id="connect_txt" style="font-size: 18px; text-align: right; width: 95%; margin-top: 19%;">
-								<span class="formal_type">
-										הכנו לך הפתעה קטנה. תאשר אותנו בפייסבוק.
-								</span>
-							</div>
-							<div id="connect_img" style="margin-top: 2%; width:50%; margin-top:-8%;">
-								<img src="images/connect_fb.png" style="width: 100%; height: 100%;" />
-							</div>
-						</div>
+					<div id="connect_btn">
+						<fb:login-button scope="public_profile,user_photos" data-size="xlarge"  onlogin="checkLoginState();" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div id="scene_part">
+		<div id="scene_img_page_part">
+			<div class="img_wrapper">
+				<img class="myimg" />
+				<div class="pp_descr">
+					<span></span>
+				</div>
+			</div>
+		</div>
+		<div id="scene_text_page_part">
+			<span class="phototext"></span>
+		</div>
+	</div>
+	
+	<div id="back_cover_part">
+	</div>
+	
+	<div id="scenes_data">
+		<div class="scene_data" id="wedding-photobomb1.jpg">
+			<span class="scene_text_data">אנחנו מכירים מאות אם לא אלפי שנים</span>	
+			<span class="image_desc_data">מהחתונה של דורה. אוגוסט 1954.</span>
+		</div>
+		<div class="scene_data" id="wedding-photobomb3.jpg">
+			<span class="scene_text_data">אז מה לא תבואו לחתונה<br>???</span>	
+			<span class="image_desc_data">מהחינה של אביגדור פלדמן. מרץ 2017</span>
+		</div>		
+	</div>
 </div>
 
+<script src="scripts/saveme.js" type="text/javascript"></script>
+
+<script src="scripts/fb.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-
-$('.flipbook-viewport').hide()
-
-function loadApp() {
-
-	// Create the flipbook
-
-	$('.flipbook').turn({
-			// Width
-
-			width:1600,
-			
-			// Height
-
-			height:600,
-
-			// Elevation
-
-			elevation: 50,
-			
-			// Enable gradients
-
-			gradients: true,
-			
-			// Auto center this flipbook
-
-			autoCenter: true,
-
-			page: 6
-
-	});
-	$('.flipbook-viewport').show()
-}
-
-// Load the HTML4 version if there's not CSS transform
-
-yepnope({
-	test : Modernizr.csstransforms,
-	yep: ['scripts/turn.js'],
-	nope: ['scripts/turn.html4.min.js'],
-	both: ['css/basic.css'],
-	complete: loadApp
-});
-
+	rebuildApp({})
 </script>
 
 </body>
