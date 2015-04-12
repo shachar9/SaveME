@@ -16,7 +16,7 @@ $.fn.progressSet = function(precent)
 
 
 function updateInitialDetails(response) {
-	$('#userFirstName').append(response.first_name)
+	$('.userFirstName').append(response.first_name)
 }
 
 function updateStatus(status) {
@@ -53,7 +53,7 @@ function buildAlbum(images, bakeStep) {
 	
 		scenes = $('#scenes_data').children()
 		
-		$(scenes.get().reverse()).each(function() {
+		$(scenes.get().reverse()).each(function(index) {
 	
 			scene_id = this['id']
 		
@@ -63,7 +63,12 @@ function buildAlbum(images, bakeStep) {
 
 			imgPageTag = $('#scene_img_page_part').clone()
 			imgPageTag.removeAttr('id')
-			imgPageTag.attr('class', 'page img_page')
+			if(index <= 0) {
+				imgPageTag.attr('class', 'hard img_page')
+			} else {			
+				imgPageTag.attr('class', 'page img_page')
+			}
+			
 			imgPageTag.find('.myimg').attr('src', '../' + image)
 			imgPageTag.find('.myimg').attr('alt', scene_id)
 			imgPageTag.find('.pp_descr span').append(desc)
@@ -72,7 +77,11 @@ function buildAlbum(images, bakeStep) {
 		
 			txtPageTag = $('#scene_text_page_part').clone()
 			txtPageTag.removeAttr('id')
-			txtPageTag.attr('class', 'page text_page')
+			if(index >= scenes.length - 1) {
+				txtPageTag.attr('class', 'hard text_page')
+			} else {
+				txtPageTag.attr('class', 'page text_page')
+			}
 			txtPageTag.find('span.phototext').append(text)
 		
 			myAlbum.append(txtPageTag)
@@ -82,6 +91,9 @@ function buildAlbum(images, bakeStep) {
 	var frontCover = $('<div id="front_cover" class="hard">')
 	frontCover.append($('#cover_header_pic_wrapper').clone())
 	frontCover.append($('#cover_text_' + bakeStep).clone())
+	if(bakeStep == 'done') {
+		frontCover.append($('#front_cover_part .flipSymbol').clone())
+	}
 	myAlbum.append(frontCover)
 
 	$('div.flipbook-container').append(myAlbum)

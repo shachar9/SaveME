@@ -4,17 +4,17 @@ $(document).ready(function() {
 	
 	$.ajaxSetup({ cache: true });
 	$.getScript('//connect.facebook.net/en_UK/all.js', function(){
-	FB.init({
-	 appId      : '977141175653638',
-	 cookie     : true,  // enable cookies to allow the server to access 
-	                     // the session
-	 status  : true, // check login status
-	 xfbml      : true,  // parse social plugins on this page
-	 version    : 'v2.2' // use version 2.2
-	});     
-	$('#loginbutton,#feedbutton').removeAttr('disabled');
-	FB.getLoginStatus(statusChangeCallback);
-  });
+		FB.init({
+			appId      : '977141175653638',
+			cookie     : true,  // enable cookies to allow the server to access 
+			                  // the session
+			status  : true, // check login status
+			xfbml      : true,  // parse social plugins on this page
+			version    : 'v2.2' // use version 2.2
+		});     
+		$('#loginbutton,#feedbutton').removeAttr('disabled');
+		FB.getLoginStatus(statusChangeCallback);		
+	});
 });
 
 function checkLoginState() {
@@ -33,6 +33,7 @@ function statusChangeCallback(response) {
  	if (response.status === 'connected') {
 		// Logged into your app and Facebook.
 		console.log(response.authResponse.accessToken);
+		$('#connect_btn').hide()
 		start(response.authResponse.accessToken);
  	} else if (response.status === 'not_authorized') {
    	// The person is logged into Facebook, but not your app.
@@ -50,7 +51,7 @@ function start(accessToken) {
  	FB.api('/me', function(response) {
    	console.log('Successful login for: ' + response.name);
    	updateInitialDetails(response)
-   	rebuildApp({}, 'progress')
+   	//rebuildApp({}, 'progress')
    	
    	sample(accessToken, 
    		function() { 
@@ -83,12 +84,15 @@ function sample(accessToken, finishFunc, unfinishedFunc) {
 		success: function(data) {
 			console.log(JSON.stringify(data));
 			updateStatus(data.status)
-			if (data.images) {
-				rebuildApp(data.images, 'progress')		
-			}
 			if (data.status >= 5) {
+				if (data.images) {
+					rebuildApp(data.images, 'done')		
+				}
 				return finishFunc()
 			} else {
+				if(auto_refresh == null) { // first sample
+					rebuildApp({}, 'progress')
+				}
 				return unfinishedFunc()
 			}
 		}
