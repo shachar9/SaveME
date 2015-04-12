@@ -9,48 +9,40 @@ $.fn.random = function()
     return ret;
 };
 
+$.fn.progressSet = function(precent)
+{
+	$(this).width(precent + '%')
+};
+
 
 function updateInitialDetails(response) {
 	$('#userFirstName').append(response.first_name)
 }
 
-/*
-$(document).ready(function(){
-	var controlButton = $('#controlButton').progressInitialize();
-}
-*/
-/*
-function setProgress(percentage) {
-	var bar = $('#controlButton').find('span')
-	bar.filter('.background-horizontal,.background-bar').width(percentage+'%');
-	bar.filter('.background-vertical').height(percentage+'%');
-}
-*/
-
-//var controlButton = $('#controlButton').progressInitialize();
 function updateStatus(status) {
-	//var controlButton = $('#controlButton')
+	progressBar = $('#progressBar')
 	var statusText = $('#bakeStatusSpan')
 	statusText.empty()
 	if(status >= 5) {
-		//controlButton.progressFinish();
+		progressBar.progressSet(100);
 	} else {
-		//controlButton.progressSet(status * 20);
+		progressBar.progressSet(status * 20);	
 		var status = $('#bakingStatuses_' + status).find('span').random()
 		statusText.append(status.text())
 	}
 }
 
+
 function rebuildApp(images, bakeStep) {
 	$('div.flipbook-viewport').hide()
 	buildAlbum(images, bakeStep)
-	//loadApp((Object.keys(images).length * 2) + 2)
-	loadApp(1)
+	var firstPage = (Object.keys(images).length == 0) ? 1 : (Object.keys(images).length * 2) + 2
+	loadApp(firstPage)
 	$('div.flipbook-viewport').show()
 }
 
 function buildAlbum(images, bakeStep) {
-	$('div.container').empty()
+	$('div.flipbook-container').empty()
 	var myAlbum = $('<div class="flipbook">')
 
 	if(Object.keys(images).length > 0) {
@@ -92,7 +84,7 @@ function buildAlbum(images, bakeStep) {
 	frontCover.append($('#cover_text_' + bakeStep).clone())
 	myAlbum.append(frontCover)
 
-	$('div.container').append(myAlbum)
+	$('div.flipbook-container').append(myAlbum)
 }
 
 function loadApp(pages) {
