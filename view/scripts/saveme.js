@@ -69,7 +69,7 @@ function buildAlbum(images, bakeStep) {
 				imgPageTag.attr('class', 'page img_page')
 			}
 			
-			imgPageTag.find('.myimg').attr('src', '../' + image)
+			imgPageTag.find('.myimg').attr('src', image)
 			imgPageTag.find('.myimg').attr('alt', scene_id)
 			imgPageTag.find('.pp_descr span').append(desc)
 			

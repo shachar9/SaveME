@@ -18,7 +18,8 @@ LAST_STATE = SCENES_GENERATED
 basePath = path.dirname(path.abspath(__file__))
 scenesBasePath = path.join(basePath, 'resources/scenes')
 cacheBasePath = path.join(basePath, 'cache')
-storyBasePath = path.join(basePath, 'view/story')
+viewBasePath = path.join(basePath, 'view')
+storyBasePath = path.join(viewBasePath, 'story')
 
 stepPerState = {
 	INITIATED : lambda sp, token: sp.retrievePhotosLinks(token),
@@ -86,7 +87,7 @@ class StorylineProcessor():
 		for name, img in self.generated_scenes:
 			impath = path.join(odir, name)
 			image_helper.saveImage(impath, img)
-			self.generated_images_paths[name] = path.relpath(impath, basePath)
+			self.generated_images_paths[name] = path.relpath(impath, viewBasePath)
 		self.__setState(SCENES_GENERATED)
 
 	def __repr__(self):
