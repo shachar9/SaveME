@@ -12,8 +12,8 @@ $(document).ready(function() {
 			xfbml      : true,  // parse social plugins on this page
 			version    : 'v2.2' // use version 2.2
 		});     
-		$('#loginbutton,#feedbutton').removeAttr('disabled');
 		FB.getLoginStatus(statusChangeCallback);		
+		$('#loginbutton,#feedbutton').removeAttr('disabled');		
 	});
 });
 
