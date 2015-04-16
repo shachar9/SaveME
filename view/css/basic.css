@@ -104,6 +104,7 @@ body{
 }
 
 .cover_text {
+	position: absolute;
 	height: 42%;
 	width: 52%;
 	margin-left: 22%;
@@ -125,19 +126,21 @@ body{
 
 #connect {
 	width: 100%;
-	margin-top: 2%;
+	position: absolute;
+	bottom: 10%;
 }
 
 #connect_txt {
 	font-size: 18px; 
 	text-align: right; 
 	width: 95%;
-	 margin-top: 19%;
 }
 
 #connect_btn {
-	margin-top: 1%; 
-	width:50%;
+	width: 50%;
+	margin-top: 1%;
+	position: absolute;
+	bottom: -50%;
 }
 
 #baking {
@@ -146,15 +149,17 @@ body{
 }
 
 #bake_status_words {
-	text-align: right; 
+	text-align: right;
 	width: 95%;
 	font-size: 20px;
+	position: absolute;
+	bottom: 22%;
 }
 
 #bake_progress {
 	position: absolute;
-	bottom: 12%;
-	width: 52%;
+	bottom: 0%;
+	width: 100%;
 }
 
 #progressText {
@@ -164,10 +169,10 @@ body{
 }
 
 #coverReadyText {
-	bottom: 20%;
+	position: absolute;
+	bottom: 0%;
 	text-align: center;
 	width: 100%;
-	margin-top: 30%;
 	font-size: 25px;
 }
 
@@ -187,6 +192,7 @@ body{
 }
 
 .img_wrapper {
+	position: absolute;
 	height: 71%;
 	width: 80%;
 	margin-top: 8% !important;
@@ -214,7 +220,9 @@ body{
 	font-family: "dybook";
 	text-align: center;
 	font-size: 14px;
-	margin-top: -6%;
+	position: absolute;
+	width: 100%;
+	top: 105%;
 }
 
 .phototext{
