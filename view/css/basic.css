@@ -55,6 +55,16 @@ body{
 	box-shadow:0 0 50px rgba(0,0,0,0.2);
 }
 
+.formalStuff {
+	font-size: 11px;
+	position:absolute;
+	left:40%;
+	bottom:15%;
+}
+
+.formalStuff a {
+	color: black;
+}
 
 #back_cover {
 	background-image:url(../pics/WEDDING-002.jpg)

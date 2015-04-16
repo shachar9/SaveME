@@ -21,15 +21,18 @@ def collectPhotosAndTags(token, user_id=None):
 	photos = graphApiRequest(token, '%s/photos'%user_id, ['images','tags'])
 	if len(photos['data']) == 0:
 		raise Exception("No photos, probably not enough priviliges")
-	results = []
+	results = getPhotosDetails(photos, user_id)
 	paging = photos['paging']
 	while('next' in paging.keys()):
 		res = urllib.urlopen(paging['next'])
 		photos = json.loads(res.read()) if res.code == 200 else None
-		paging = photos['paging']		
-		lst = [getPhotoData(p, user_id) for p in photos['data']]
-		results += [p for p in lst if p is not None]
+		paging = photos['paging']				
+		results += getPhotosDetails(photos, user_id)
 	return results
+
+def getPhotosDetails(jphotos, user_id):
+	lst = [getPhotoData(p, user_id) for p in jphotos['data']]
+	return [p for p in lst if p is not None]
 
 def getPhotoData(jphoto, user_id):
 	if len(jphoto['images']) == 0:
