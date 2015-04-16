@@ -66,8 +66,12 @@ body{
 	color: black;
 }
 
-#back_cover {
-	background-image:url(../pics/WEDDING-002.jpg)
+#back_cover img {
+	position: absolute;
+	width: 50%;
+	height: 90%;
+	top: 5%;
+	right: 25%;
 }
 
 
