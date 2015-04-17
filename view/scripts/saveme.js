@@ -26,9 +26,13 @@ function updateStatus(status) {
 	if(status >= 5) {
 		progressBar.progressSet(100);
 	} else {
-		progressBar.progressSet(status * 20);	
+		if(status < 0) { 
+			$('.progress').hide()
+		} else {
+			progressBar.progressSet(status * 20);	
+		}
 		var status = $('#bakingStatuses_' + status).find('span').random()
-		statusText.append(status.text())
+		statusText.append(status)
 	}
 }
 

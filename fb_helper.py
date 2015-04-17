@@ -20,7 +20,7 @@ def collectPhotosAndTags(token, user_id=None):
 		user_id = graphApiRequest(token, 'me', ['id'])['id']
 	photos = graphApiRequest(token, '%s/photos'%user_id, ['images','tags'])
 	if len(photos['data']) == 0:
-		raise Exception("No photos, probably not enough priviliges")
+		raise Exception("No photos, might be privilige problems.")
 	results = getPhotosDetails(photos, user_id)
 	paging = photos['paging']
 	while('next' in paging.keys()):

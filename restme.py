@@ -31,6 +31,8 @@ class Go:
 	def POST(self):
 		post_args = urlparse.parse_qs(web.data())
 		resp = saveme.go(post_args['fb_token'][0])
+		if resp['status'] < 0:
+			web.ctx.status = '501 Server Error'
 		web.header('Content-Type', 'application/json')
 		return json.dumps(resp);
 

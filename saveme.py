@@ -29,6 +29,9 @@ stepPerState = {
 	SCENES_GENERATED : lambda sp, token: True
 }
 
+# Errors:
+NO_IMAGES = "No photos, might be privilige problems."
+NO_FACES = "Didn't find any good photos of you."
 
 class StorylineProcessor():
 	
@@ -60,7 +63,7 @@ class StorylineProcessor():
 		user_faces_images = [image_helper.cropFaceFromImageDetails(*im) for im in user_files_details]
 		self.user_faces_images = [im for im in user_faces_images if im != None]
 		if len(self.user_faces_images) == 0:
-			raise Exception("Didn't find any photos of you.")
+			raise Exception(NO_FACES)
 		self.__setState(FACES_DATA_READY)
 
 	def chooseScenesParams(self):
@@ -104,7 +107,7 @@ def go(fb_access_token):
 		sp.start(fb_access_token)
 	except Exception as e: 
 		logging.error("Story start error: %s. %s", e, sp)
-		return { 'status': -1 }
+		return { 'status': getErrStatus(1) }
 	pId = sp.getId()
 	#latestSP = loadLatestSP(pId)
 	latestSP = getFromCache(pId)
@@ -133,10 +136,12 @@ def runSP(sp, fb_access_token):
 	sp.running = True
 	logging.info("Running for step %d.", sp.state)
 	try:
+		sp.state = int(str(abs(sp.state))[0])
 		result = stepPerState[sp.state](sp, fb_access_token)
 	except Exception as e:
-		logging.error("Story phase error: %s. %s", e, sp)
 		sp.running = False
+		sp.state = getErrStatus(e, sp.state)
+		logging.error("Story phase error: %s. %s", e, sp)		
 		return
 	logging.info("Done %d. %s.", sp.state, sp)
 	if sp.state in (IMAGES_SOURCES_READY, FACES_DATA_READY, LAST_STATE):
@@ -146,6 +151,13 @@ def runSP(sp, fb_access_token):
 	else:
 		logging.info("Finito running %s.", sp)
 		sp.running = False
+
+def getErrStatus(e, state):
+	if e.message == NO_IMAGES:
+		return -11
+	elif e.message == NO_FACES:
+		return -21
+	return -1 * abs(state)
 
 def loadLatestSP(user_id):
 	#if user_id in storyProcessorsCache:
@@ -186,6 +198,6 @@ def warmCache():
 	for pId in os.listdir(cacheBasePath):
 		saveToCache(pId, loadLatestSP(pId))
 
-warmCache()
+#warmCache()
 	
 

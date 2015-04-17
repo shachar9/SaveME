@@ -55,7 +55,7 @@ function start(accessToken) {
    	
    	sample(accessToken, 
    		function() { 
-   			console.log('Done');
+   			console.log('Done Sampling.');
    			return true 
    		},
    		function() {
@@ -95,6 +95,22 @@ function sample(accessToken, finishFunc, unfinishedFunc) {
 				}
 				return unfinishedFunc()
 			}
+		},
+		error: function(data) {
+			console.log('ERROR');
+			console.log(JSON.stringify(data));
+			rebuildApp({}, 'progress')			
+			try {
+				var jres = JSON.parse(data['responseText'])
+				if(jres.hasOwnProperty('status')) {
+					updateStatus(jres.status)
+				} else {
+					updateStatus(-17)
+				}
+			} catch(err) {
+				updateStatus(-17)
+			}
+			return finishFunc()
 		}
   });
 }
