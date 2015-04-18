@@ -7,6 +7,8 @@ import fb_helper
 import image_helper
 import sys
 import logging
+import ConfigParser
+import random
 from retrying import retry
 from beaker.cache import CacheManager
 from beaker.util import parse_cache_config_options
@@ -32,6 +34,16 @@ stepPerState = {
 # Errors:
 NO_IMAGES = "No photos, might be privilige problems."
 NO_FACES = "Didn't find any good photos of you."
+
+cfg = ConfigParser.ConfigParser()
+cfg.read(path.join(basePath, 'config.ini'))
+
+def getListConfig(section, option, typeFunc=lambda o: o):
+	lst = cfg.get(section, option).strip().split(',')
+	if len(lst) == 1 and lst[0] == '':
+		return []
+	else:
+		return [typeFunc(o.strip()) for o in lst]
 
 class StorylineProcessor():
 	
@@ -68,10 +80,11 @@ class StorylineProcessor():
 
 	def chooseScenesParams(self):
 		user_faces_map = { i : img for i, img in enumerate(self.user_faces_images) }
-		self.scenes = ['wedding-photobomb1.jpg', 'wedding-photobomb3.jpg']
-		scenes_faces = { s : image_helper.loadSubImage(path.join(scenesBasePath, s)) for s in self.scenes }
+		scenes_by_order = [cfg.get('Scenes',s) for s in cfg.options('Scenes')]
+		self.scenes = { sname : self.__chooseImage(sname) for sname in scenes_by_order }
+		scenes_faces = { s : image_helper.loadSubImage(path.join(scenesBasePath, self.scenes[s])) for s in scenes_by_order }
 		sorted_by_hist = { s : image_helper.sortByHistogram(scenes_faces[s], user_faces_map) for s in self.scenes }
-		self.scenes_params = [(s, sorted_by_hist[s][0][0]) for s in self.scenes]
+		self.scenes_params = [(s, sorted_by_hist[s][0][0]) for s in scenes_by_order]
 		self.__setState(SCENES_CHOSEN)
 
 	def __getOutputDir(self):
@@ -83,15 +96,26 @@ class StorylineProcessor():
 			os.remove(path.join(user_dir, f))
 		return user_dir;
 
+	def __chooseImage(self, sname):
+		 return random.sample(getListConfig('ScenesConfig',sname), 1)[0]
+
 	def generateScenes(self):
-		self.generated_scenes = [(s, image_helper.placeFaceInScene(path.join(scenesBasePath, s), self.user_faces_images[u])) for s, u in self.scenes_params]
+		self.generated_scenes = [(s, image_helper.placeFaceInScene(path.join(scenesBasePath, self.scenes[s]), self.user_faces_images[u])) for s, u in self.scenes_params]
 		odir = self.__getOutputDir()
-		self.generated_images_paths = {}
+		self.generated_images_paths = []
 		for name, img in self.generated_scenes:
-			impath = path.join(odir, name)
+			impath = path.join(odir, name + '.jpg')
 			image_helper.saveImage(impath, img)
-			self.generated_images_paths[name] = path.relpath(impath, viewBasePath)
+			self.generated_images_paths.append({'id' :name, 'src': path.relpath(impath, viewBasePath)})
+		if not cfg.getboolean('Performance', 'KeepIntermediateData'):
+			self.__clearIntermediateData()
 		self.__setState(SCENES_GENERATED)
+
+	def __clearIntermediateData(self):
+		self.user_faces_images = []
+		self.scenes_params = []
+		self.generated_scenes = []
+	
 
 	def __repr__(self):
 		return "StorylineProcessor[%s]: State = %d | Running = %d" % (self.basic_details['id'], self.state, self.running)
@@ -144,7 +168,7 @@ def runSP(sp, fb_access_token):
 		logging.error("Story phase error: %s. %s", e, sp)		
 		return
 	logging.info("Done %d. %s.", sp.state, sp)
-	if sp.state in (IMAGES_SOURCES_READY, FACES_DATA_READY, LAST_STATE):
+	if sp.state in getListConfig('Performance','PersistInCache',lambda x: int(x)):
 		persist(sp)
 	if sp.state < LAST_STATE:
 		runSP(sp, fb_access_token)
@@ -175,6 +199,8 @@ def loadLatestSP(user_id):
 	#storyProcessorsCache[user_id] = sp
 	return sp
 
+
+
 def persist(sp):
 	try:
 		if sp.state < INITIATED:
@@ -198,6 +224,7 @@ def warmCache():
 	for pId in os.listdir(cacheBasePath):
 		saveToCache(pId, loadLatestSP(pId))
 
-#warmCache()
+if cfg.getboolean('Performance', 'WarmupCache'):
+	warmCache()
 	
 

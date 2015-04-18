@@ -55,15 +55,14 @@ function buildAlbum(images, bakeStep) {
 		backCover.attr('class', 'hard')	
 		myAlbum.append(backCover)
 	
-		scenes = $('#scenes_data').children()
-		
-		$(scenes.get().reverse()).each(function(index) {
+		$(images.reverse()).each(function(index) {
 	
-			scene_id = this['id']
-		
-			image = images[scene_id]
-			text = $(this).find('span.scene_text_data').text()
-			desc = $(this).find('span.image_desc_data').text()
+			var scene_id = this['id']				
+			var image = this['src']
+			var dataTag = $('#' + scene_id)
+			
+			text = dataTag.find('span.scene_text_data').text()
+			desc = dataTag.find('span.image_desc_data').text()
 
 			imgPageTag = $('#scene_img_page_part').clone()
 			imgPageTag.removeAttr('id')
@@ -81,7 +80,7 @@ function buildAlbum(images, bakeStep) {
 		
 			txtPageTag = $('#scene_text_page_part').clone()
 			txtPageTag.removeAttr('id')
-			if(index >= scenes.length - 1) {
+			if(index >= images.length - 1) {
 				txtPageTag.attr('class', 'hard text_page')
 			} else {
 				txtPageTag.attr('class', 'page text_page')
