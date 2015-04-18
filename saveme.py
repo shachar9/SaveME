@@ -74,6 +74,7 @@ class StorylineProcessor():
 		user_files_details = [(p, fb_helper.retrieveImage(p)) for p in self.photos_sources[:50]]
 		user_faces_images = [image_helper.cropFaceFromImageDetails(*im) for im in user_files_details]
 		self.user_faces_images = [im for im in user_faces_images if im != None]
+		self.__removeTmpFiles([f for n,f in user_files_details])
 		if len(self.user_faces_images) == 0:
 			raise Exception(NO_FACES)
 		self.__setState(FACES_DATA_READY)
@@ -87,18 +88,6 @@ class StorylineProcessor():
 		self.scenes_params = [(s, sorted_by_hist[s][0][0]) for s in scenes_by_order]
 		self.__setState(SCENES_CHOSEN)
 
-	def __getOutputDir(self):
-		user_dir = path.join(storyBasePath, self.basic_details['id'])
-		if not path.exists(user_dir):
-			os.mkdir(user_dir)
-		# Delete exisitng files
-		for f in os.listdir(user_dir):
-			os.remove(path.join(user_dir, f))
-		return user_dir;
-
-	def __chooseImage(self, sname):
-		 return random.sample(getListConfig('ScenesConfig',sname), 1)[0]
-
 	def generateScenes(self):
 		self.generated_scenes = [(s, image_helper.placeFaceInScene(path.join(scenesBasePath, self.scenes[s]), self.user_faces_images[u])) for s, u in self.scenes_params]
 		odir = self.__getOutputDir()
@@ -110,6 +99,25 @@ class StorylineProcessor():
 		if not cfg.getboolean('Performance', 'KeepIntermediateData'):
 			self.__clearIntermediateData()
 		self.__setState(SCENES_GENERATED)
+
+	def __removeTmpFiles(self, files):
+		for f in files:
+			try:
+				os.remove(f)
+			except:
+				logging.error("Error removing %s.", f)
+
+	def __getOutputDir(self):
+		user_dir = path.join(storyBasePath, self.basic_details['id'])
+		if not path.exists(user_dir):
+			os.mkdir(user_dir)
+		# Delete exisitng files
+		for f in os.listdir(user_dir):
+			os.remove(path.join(user_dir, f))
+		return user_dir;
+
+	def __chooseImage(self, sname):
+		 return random.sample(getListConfig('ScenesConfig',sname), 1)[0]
 
 	def __clearIntermediateData(self):
 		self.user_faces_images = []
@@ -131,7 +139,7 @@ def go(fb_access_token):
 		sp.start(fb_access_token)
 	except Exception as e: 
 		logging.error("Story start error: %s. %s", e, sp)
-		return { 'status': getErrStatus(1) }
+		return { 'status': getErrStatus(e, 1) }
 	pId = sp.getId()
 	#latestSP = loadLatestSP(pId)
 	latestSP = getFromCache(pId)

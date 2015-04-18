@@ -31,7 +31,7 @@ function updateStatus(status) {
 		} else {
 			progressBar.progressSet(status * 20);	
 		}
-		var status = $('#bakingStatuses_' + status).find('span').random()
+		var status = $('#bakingStatuses_' + status).find('span').random().clone()
 		statusText.append(status)
 	}
 }
