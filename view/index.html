@@ -8,25 +8,28 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width = 1050, user-scalable = no" />
 	<title>Ronit & Shachar - Save The Date</title>
-	<!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
-	<script type="text/javascript" src="scripts/jquery.min.1.7.js"></script>
-	<script type="text/javascript" src="scripts/modernizr.2.5.3.min.js"></script>
+	
+ 	<!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="scripts/modernizr.2.5.3.min.js"></script>	
+	<script type="text/javascript" src="scripts/lightbox.min.js"></script>
+	<link href="css/lightbox.css" rel="stylesheet" />
 </head>
 <body>
 
 <div class="flipbook-viewport">
 	<div class="flipbook-container">
 	</div>
-	<div class="formalStuff">
-		SaveME operated by Ronit Klein and Shachar Seidman. <a href="privacy">Privacy Policy.</a>
-	</div>
+</div>
+<div class="formalStuff">
+	SaveME operated by Ronit Klein and Shachar Seidman. <a href="privacy">Privacy Policy.</a>
 </div>
 
 <div id="book_pages" style="display: none;">	
 	<div id="front_cover_part">
 		<div id="cover_header_pic_wrapper">
 			<div id="cover_header_pic">
-				<img class="cover_img fill_img" src="pics/mexican-party-us.jpg" />
+				<img class="cover_img fill_img" src="images/mexican-party-us.jpg" />
 			</div>
 		</div>
 		
@@ -163,7 +166,7 @@
 	<div id="scene_part">
 		<div id="scene_img_page_part">
 			<div class="img_wrapper">
-				<img class="myimg" />
+				<a class="myimgzoom" href="#" data-lightbox="image-1" data-title="My caption"><img class="myimg" /></a>
 				<div class="pp_descr">
 					<span></span>
 				</div>
@@ -178,7 +181,8 @@
 	</div>
 	
 	<div id="back_cover_part">
-		<img src="pics/WEDDING-002.jpg" />
+		<a class="invitationzoom" href="images/WEDDING-002.jpg" data-lightbox="invitation"><img id="invitation_2" src="images/WEDDING-002.jpg" /></a>	
+		<a class="invitationzoom" href="images/WEDDING-001.jpg" data-lightbox="invitation"><img id="invitation_1" src="images/WEDDING-001.jpg" /></a>
 	</div>
 	
 	<div id="scenes_data">
@@ -216,7 +220,6 @@
 <script src="scripts/saveme.js" type="text/javascript"></script>
 
 <script src="scripts/fb.js" type="text/javascript"></script>
-
 <script type="text/javascript">
 	rebuildApp({}, 'login')
 </script>

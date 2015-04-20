@@ -50,9 +50,9 @@ function buildAlbum(images, bakeStep) {
 	var myAlbum = $('<div class="flipbook">')
 
 	if(Object.keys(images).length > 0) {
-		var backCover = $('#back_cover_part').clone()
+		var backCover = $('#back_cover_part')
 		backCover.attr('id', 'back_cover')
-		backCover.attr('class', 'hard')	
+		backCover.attr('class', 'hard')
 		myAlbum.append(backCover)
 	
 		$(images.reverse()).each(function(index) {
@@ -74,6 +74,9 @@ function buildAlbum(images, bakeStep) {
 			
 			imgPageTag.find('.myimg').attr('src', image)
 			imgPageTag.find('.myimg').attr('alt', scene_id)
+			imgPageTag.find('.myimgzoom').attr('href', image)
+			imgPageTag.find('.myimgzoom').attr('data-lightbox', 'dl-' + scene_id)
+			imgPageTag.find('.myimgzoom').attr('data-title', desc)
 			imgPageTag.find('.pp_descr span').append(desc)
 			
 			myAlbum.append(imgPageTag)

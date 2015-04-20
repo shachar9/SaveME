@@ -59,7 +59,7 @@ body{
 	font-size: 11px;
 	position:absolute;
 	left:40%;
-	bottom:15%;
+	margin-top:50%;
 }
 
 .formalStuff a {
@@ -68,10 +68,19 @@ body{
 
 #back_cover img {
 	position: absolute;
-	width: 50%;
-	height: 90%;
-	top: 5%;
-	right: 25%;
+	width: 30%;
+	height: 60%;
+	top: 15%;
+}
+
+#invitation_1 {
+	right: 15%;
+	transform: rotate(10deg);
+}
+
+#invitation_2 {
+	right: 55%;
+	transform: rotate(-10deg);
 }
 
 
@@ -273,6 +282,10 @@ body{
 	-webkit-box-shadow: 1px -1px 16px 7px rgba(0,0,0,0.65);
 	-moz-box-shadow: 1px -1px 16px 7px rgba(0,0,0,0.65);
 	box-shadow: 1px -1px 16px 7px rgba(0,0,0,0.65);
+}
+
+.lb-caption {
+	font-family: "dybook";
 }
 
 /*----------------------------
