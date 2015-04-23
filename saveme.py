@@ -62,7 +62,6 @@ class StorylineProcessor():
 	@retry(stop_max_attempt_number=3)
 	def start(self, fb_access_token):
 		self.basic_details = fb_helper.graphApiRequest(fb_access_token, 'me', ['id', 'name', 'first_name', 'last_name', 'gender'])
-		logging.info("New user. ID is %s. Name is %s.", self.basic_details['id'], self.basic_details['name'])
 		self.__setState(INITIATED)
 
 	@retry(stop_max_attempt_number=3)
@@ -147,6 +146,7 @@ def go(fb_access_token):
 	if latestSP != None:
 		sp = latestSP
 	else:
+		logging.info("New user. ID is %s. Name is %s.", sp.basic_details['id'], sp.basic_details['name'])	
 		saveToCache(pId, sp)
 	res = { 'status': sp.state }
 	if sp.state == LAST_STATE:
