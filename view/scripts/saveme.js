@@ -133,34 +133,34 @@ function loadApp(pages) {
 	var screenW = $( document ).width();
 	
 	if(screenW < 1200) {
-		$('#fc_title').css('font-size','15px')
-		$('#coverReadyText').css('font-size','17px')		
-		$('#fc_remindme').css('font-size','6px')
-		$('#connect_txt').css('font-size','10px')	
-		$('#bake_status_words').css('font-size','12px')	
-		w = 800
-		h = 300
-	} else if(screenW < 1600) {
-		$('#fc_title').css('font-size','17px')
+		$('#fc_title').css('font-size','18px')
 		$('#coverReadyText').css('font-size','19px')		
 		$('#fc_remindme').css('font-size','8px')
 		$('#connect_txt').css('font-size','12px')	
-		$('#bake_status_words').css('font-size','14px')		
+		$('#bake_status_words').css('font-size','14px')	
+		w = 800
+		h = 300
+	} else if(screenW < 1500) {
+		$('#fc_title').css('font-size','21px')
+		$('#coverReadyText').css('font-size','22px')		
+		$('#fc_remindme').css('font-size','12px')
+		$('#connect_txt').css('font-size','14px')	
+		$('#bake_status_words').css('font-size','18px')		
 		w = 1000
 		h = 375
 	} else if(screenW < 1800)  {
-		$('#fc_title').css('font-size','21px')
-		$('#coverReadyText').css('font-size','23px')		
-		$('#fc_remindme').css('font-size','12px')
-		$('#connect_txt').css('font-size','16px')	
-		$('#bake_status_words').css('font-size','18px')	
+		$('#fc_title').css('font-size','25px')
+		$('#coverReadyText').css('font-size','27px')		
+		$('#fc_remindme').css('font-size','16px')
+		$('#connect_txt').css('font-size','20px')	
+		$('#bake_status_words').css('font-size','22px')	
 		w = 1200
 		h = 450
 	}
 	
 	if($( document ).width() < 1800) {
 		$('.fb-login-button').attr('data-size', 'large')
-		$('#connect').css('bottom','9%')				
+		$('#connect').css('bottom','13%')				
 		$('#connect_btn').css('bottom','')
 	}
 	

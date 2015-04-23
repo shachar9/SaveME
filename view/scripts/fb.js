@@ -12,8 +12,9 @@ $(document).ready(function() {
 			xfbml      : true,  // parse social plugins on this page
 			version    : 'v2.2' // use version 2.2
 		});     
-		FB.getLoginStatus(statusChangeCallback);		
+		FB.getLoginStatus(statusChangeCallback);
 		$('#loginbutton,#feedbutton').removeAttr('disabled');		
+		$('.fbLoader').hide()
 	});
 });
 
@@ -34,7 +35,7 @@ function statusChangeCallback(response) {
 		// Logged into your app and Facebook.
 		console.log(response.authResponse.accessToken);
 		$('#connect_btn').hide()
-		start(response.authResponse.accessToken);
+		start(response.authResponse.accessToken);	
  	} else if (response.status === 'not_authorized') {
    	// The person is logged into Facebook, but not your app.
    	console.log('User is not logged into the app.');

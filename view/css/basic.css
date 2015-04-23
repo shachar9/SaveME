@@ -1,10 +1,10 @@
 /* Basic sample */
 
 @font-face {
-  font-family: 'dorianclm-book-webfont';
+  font-family: 'shofarregular-webfont';
   font-style: normal;
   font-weight: normal;
-  src: url('../fonts/dorianclm-book-webfont.woff') format('woff');
+  src: url('../fonts/shofarregular-webfont.woff') format('woff');
 }
 
 @font-face {
@@ -86,6 +86,10 @@ body{
 	color: black;
 }
 
+#back_cover {
+	background-image:url(../images/album_cover_back.jpg)
+}
+
 #back_cover img {
 	position: absolute;
 	width: 30%;
@@ -130,9 +134,9 @@ body{
 }
 
 .cover_img {
-	webkit-box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.35);
-	-moz-box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.35);
-	box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 0px 0px 12px 6px rgba(76,80,102,1);
+	-moz-box-shadow: 0px 0px 12px 6px rgba(76,80,102,1);
+	box-shadow: 0px 0px 12px 6px rgba(76,80,102,1);
 }
 
 .cover_text {
@@ -149,12 +153,12 @@ body{
 
 #fc_title {
 	width: 100%;
-	font-size:24px;
+	font-size:28px;
 	text-align: center;
 }
 
 #fc_remindme {
-	font-size: 14px;
+	font-size: 18px;
 	text-align: right;
 	width: 95%;
 	margin-top: 2%;
@@ -167,7 +171,7 @@ body{
 }
 
 #connect_txt {
-	font-size: 18px; 
+	font-size: 22px; 
 	text-align: right; 
 	width: 95%;
 }
@@ -187,7 +191,7 @@ body{
 #bake_status_words {
 	text-align: right;
 	width: 95%;
-	font-size: 20px;
+	font-size: 24px;
 	position: absolute;
 	bottom: 22%;
 }
@@ -209,7 +213,7 @@ body{
 	bottom: 0%;
 	text-align: center;
 	width: 100%;
-	font-size: 25px;
+	font-size: 29px;
 }
 
 .flipSymbol {
@@ -220,11 +224,30 @@ body{
 }
 
 .img_page {
-	background-color: #f2f5f7;
+/*	background-image:url("https://farm7.staticflickr.com/6238/6338813916_534843f0b0_o.jpg")*/
+	
+}
+
+.img_page .pageBorder {
+	position: absolute;
+	height: 100%;
+	right: 0%;
 }
 
 .text_page {
-	background-color: #f2f5f7;
+	/*background-image:url("https://farm7.staticflickr.com/6238/6338813916_534843f0b0_o.jpg")*/
+}
+
+.text_page .pageBorder {
+	position: absolute;
+	height: 100%;
+	left: 0%;
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
 }
 
 .img_wrapper {
@@ -273,7 +296,7 @@ body{
 }
 
 .formal_type {
-	font-family: "dorianclm-book-webfont";
+	font-family: "shofarregular-webfont";
 	display: inline-block;
 	width: 100%
 }
@@ -350,7 +373,7 @@ body{
     float: left;
     width: 0px;
     height: 100%;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 20px;
     color: #FFF;
     text-align: center;
