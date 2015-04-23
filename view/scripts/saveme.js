@@ -61,8 +61,8 @@ function buildAlbum(images, bakeStep) {
 			var image = this['src']
 			var dataTag = $('#' + scene_id)
 			
-			text = dataTag.find('span.scene_text_data').text()
-			desc = dataTag.find('span.image_desc_data').text()
+			text = dataTag.find('span.scene_text_data').html()
+			desc = dataTag.find('span.image_desc_data').html()
 
 			imgPageTag = $('#scene_img_page_part').clone()
 			imgPageTag.removeAttr('id')
@@ -92,6 +92,8 @@ function buildAlbum(images, bakeStep) {
 		
 			myAlbum.append(txtPageTag)
 		});
+		
+		//startPlayer()
 	}
 
 	var frontCover = $('<div id="front_cover" class="hard">')
@@ -102,7 +104,26 @@ function buildAlbum(images, bakeStep) {
 	}
 	myAlbum.append(frontCover)
 
-	$('div.flipbook-container').append(myAlbum)
+	$('div.flipbook-container').append(myAlbum)		
+}
+
+function startPlayer() {
+	$("#jplayer_1").jPlayer({
+		ready: function() {
+			$(this).jPlayer("setMedia", {
+				mp3: "http://www.jplayer.org/audio/mp3/Miaow-snip-Stirring-of-a-fool.mp3"
+			}).jPlayer("play");
+			var click = document.ontouchstart === undefined ? 'click' : 'touchstart';
+			var kickoff = function () {
+				$("#jplayer_1").jPlayer("play");
+				document.documentElement.removeEventListener(click, kickoff, true);
+			};
+			document.documentElement.addEventListener(click, kickoff, true);
+		},
+		swfPath: "/scripts",
+		loop: true
+	});
+	$('#jp_container_1').show()
 }
 
 function loadApp(pages) {

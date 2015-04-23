@@ -13,13 +13,17 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="scripts/modernizr.2.5.3.min.js"></script>	
 	<script type="text/javascript" src="scripts/lightbox.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.jplayer.min.js"></script>
 	<link href="css/lightbox.css" rel="stylesheet" />
 </head>
 <body>
-
 <div class="flipbook-viewport">
 	<div class="flipbook-container">
 	</div>
+</div>
+<div id="jp_container_1">
+	<div class="jp-play"><img class="fill_img" src="images/audio-on.png" /></div>
+	<div class="jp-pause"><img class="fill_img" src="images/audio-off.png" /></div>
 </div>
 <div class="formalStuff">
 	SaveME operated by Ronit Klein and Shachar Seidman. <a href="privacy">Privacy Policy.</a>
@@ -202,16 +206,20 @@
 			<span class="scene_text_data">וגם לפעמים סתם עשינו חיים</span>	
 			<span class="image_desc_data">פסטיבל ברנינג משרום. גוודלחרה ינואר 2010</span>
 		</div>
-		<div class="scene_data" id="Wedding">
+		<div class="scene_data" id="WeddingInv">
 			<span class="scene_text_data">אז מה לא תבואו לחתונה שלנו<br>???</span>	
 			<span class="image_desc_data">החתונה של רונית ושחר. 27 במאי 2015</span>
-		</div>				
+		</div>	
+		<div class="scene_data" id="WeddingYou">
+			<span class="scene_text_data">מצפים לראותכם<br>רונית ושחר</span>	
+			<span class="image_desc_data">החתונה של רונית ושחר. 27 במאי 2015</span>
+		</div>					
 		<div class="scene_data" id="Wedding1">
 			<span class="scene_text_data">אנחנו מכירים מאות אם לא אלפי שנים</span>	
 			<span class="image_desc_data">מהחתונה של דורה. אוגוסט 1954.</span>
 		</div>
 		<div class="scene_data" id="Wedding2">
-			<span class="scene_text_data">אז מה לא תבואו לחתונה<br>???</span>	
+			<span class="scene_text_data">אז מה לא תבואו לחתונה</span>	
 			<span class="image_desc_data">מהחינה של אביגדור פלדמן. מרץ 2017</span>
 		</div>		
 	</div>
@@ -221,8 +229,11 @@
 
 <script src="scripts/fb.js" type="text/javascript"></script>
 <script type="text/javascript">
+	$('#jp_container_1').hide()
 	rebuildApp({}, 'login')
 </script>
-
+<div class="overlay"></div>
+<div id="jplayer_1">
+</div>
 </body>
 </html>
