@@ -107,12 +107,12 @@ function buildAlbum(images, bakeStep) {
 	$('div.flipbook-container').append(myAlbum)		
 }
 
-function startPlayer() {
+function loadPlayer() {
 	$("#jplayer_1").jPlayer({
 		ready: function() {
 			$(this).jPlayer("setMedia", {
 				mp3: "music/Oasis-Champagne-Supernova-cut.mp3"
-			}).jPlayer("play");
+			}).jPlayer("load");
 			var click = document.ontouchstart === undefined ? 'click' : 'touchstart';
 			var kickoff = function () {
 				$("#jplayer_1").jPlayer("play");
@@ -123,6 +123,10 @@ function startPlayer() {
 		swfPath: "/scripts",
 		loop: true
 	});
+}
+
+function startPlayer() {
+	$("#jplayer_1").jPlayer("play");
 	$('#jp_container_1').show()
 }
 

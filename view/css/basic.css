@@ -225,6 +225,14 @@ body{
 	bottom: 2%;
 }
 
+.page {
+	border-radius: 5px;
+}
+
+.hard {
+	border-radius: 5px;
+}
+
 .img_page {
 /*	background-image:url("https://farm7.staticflickr.com/6238/6338813916_534843f0b0_o.jpg")*/
 	

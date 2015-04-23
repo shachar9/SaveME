@@ -235,12 +235,13 @@
 <script src="scripts/saveme.js" type="text/javascript"></script>
 
 <script src="scripts/fb.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$('#jp_container_1').hide()
-	rebuildApp({}, 'login')
-</script>
 <div class="overlay"></div>
 <div id="jplayer_1">
 </div>
+<script type="text/javascript">
+	$('#jp_container_1').hide()
+	loadPlayer()
+	rebuildApp({}, 'login')
+</script>
 </body>
 </html>
