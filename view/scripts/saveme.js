@@ -93,7 +93,7 @@ function buildAlbum(images, bakeStep) {
 			myAlbum.append(txtPageTag)
 		});
 		
-		//startPlayer()
+		startPlayer()
 	}
 
 	var frontCover = $('<div id="front_cover" class="hard">')
@@ -111,7 +111,7 @@ function startPlayer() {
 	$("#jplayer_1").jPlayer({
 		ready: function() {
 			$(this).jPlayer("setMedia", {
-				mp3: "http://www.jplayer.org/audio/mp3/Miaow-snip-Stirring-of-a-fool.mp3"
+				mp3: "music/Oasis-Champagne-Supernova-cut.mp3"
 			}).jPlayer("play");
 			var click = document.ontouchstart === undefined ? 'click' : 'touchstart';
 			var kickoff = function () {
