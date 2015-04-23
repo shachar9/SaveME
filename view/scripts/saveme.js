@@ -133,24 +133,28 @@ function loadApp(pages) {
 	var screenW = $( document ).width();
 	
 	if(screenW < 1200) {
-		$('#fc_title').css('font-size','18px')
-		$('#coverReadyText').css('font-size','19px')		
-		$('#fc_remindme').css('font-size','8px')
-		$('#connect_txt').css('font-size','12px')	
-		$('#bake_status_words').css('font-size','14px')	
+		$('#fc_title').css('font-size','16px')
+		$('#coverReadyText').css('font-size','13px')		
+		$('#fc_remindme').css('font-size','7px')
+		$('#connect_txt').css('font-size','10px')	
+		$('#bake_status_words').css('font-size','12px')	
+		$('#progressText').css('font-size','10px')
+		$('.progress').css('height','20px')
 		w = 800
 		h = 300
 	} else if(screenW < 1500) {
-		$('#fc_title').css('font-size','21px')
-		$('#coverReadyText').css('font-size','22px')		
-		$('#fc_remindme').css('font-size','12px')
-		$('#connect_txt').css('font-size','14px')	
-		$('#bake_status_words').css('font-size','18px')		
+		$('#fc_title').css('font-size','20px')
+		$('#coverReadyText').css('font-size','17px')		
+		$('#fc_remindme').css('font-size','11px')
+		$('#connect_txt').css('font-size','13px')	
+		$('#bake_status_words').css('font-size','17px')
+		$('#progressText').css('font-size','12px')
+		$('.progress').css('height','24px')		
 		w = 1000
 		h = 375
 	} else if(screenW < 1800)  {
-		$('#fc_title').css('font-size','25px')
-		$('#coverReadyText').css('font-size','27px')		
+		$('#fc_title').css('font-size','24px')
+		$('#coverReadyText').css('font-size','20px')		
 		$('#fc_remindme').css('font-size','16px')
 		$('#connect_txt').css('font-size','20px')	
 		$('#bake_status_words').css('font-size','22px')	

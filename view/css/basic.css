@@ -68,6 +68,7 @@ body{
 
 
 #jp_container_1 {
+	cursor: pointer;
 	position:absolute;
 	width: 64px;
 	height: 64px;
@@ -213,7 +214,8 @@ body{
 	bottom: 0%;
 	text-align: center;
 	width: 100%;
-	font-size: 29px;
+	font-size: 26px;
+	color: blue;
 }
 
 .flipSymbol {
