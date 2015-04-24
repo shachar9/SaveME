@@ -84,7 +84,8 @@ class StorylineProcessor():
 		scenes_by_order = [cfg.get('Scenes',s) for s in cfg.options('Scenes')]
 		self.scenes = { sname : self.__chooseImage(sname) for sname in scenes_by_order }
 		scenes_faces = { s : image_helper.loadSubImage(path.join(scenesBasePath, self.scenes[s])) for s in scenes_by_order }
-		sorted_by_hist = { s : image_helper.sortByHistogram(scenes_faces[s], user_faces_map) for s in self.scenes }
+		filtered_scenes = { s : image_helper.filterBySize(scenes_faces[s], user_faces_map) for s in self.scenes }
+		sorted_by_hist = { s : image_helper.sortByHistogram(scenes_faces[s], filtered_scenes[s]) for s in self.scenes }
 		self.scenes_params = [(s, sorted_by_hist[s][0][0]) for s in scenes_by_order]
 		self.__setState(SCENES_CHOSEN)
 
@@ -207,7 +208,6 @@ def loadLatestSP(user_id):
 	logging.info("Loaded SP from cache %s.", user_id)
 	#storyProcessorsCache[user_id] = sp
 	return sp
-
 
 
 def persist(sp):

@@ -186,6 +186,10 @@ def sortByHistogram(sceneFaceImg, user_images_dict, method=cv2.cv.CV_COMP_CORREL
 	user_hists_comp = { name : cv2.compareHist(scene_hist, user_hist, method) for name, user_hist in user_hists.items() }
 	return sorted(user_hists_comp.items(), key=lambda (k,v): v, reverse=toReverse(method))
 
+def filterBySize(sceneFaceImg, user_images_dict):
+    res = { name : user_img for name, user_img in user_images_dict.items() if user_img.shape[0] >= sceneFaceImg.shape[0] and user_img.shape[1] >= sceneFaceImg.shape[1] }
+    return res if len(res) > 0 else user_images_dict
+
 def pyrMerge(scene, userFaceImg, sceneFace, maskFaceImg, sceneFaceImg=None, psize=512, lvl=3):
 	sceneFaceImg = crop(scene, *sceneFace) if sceneFaceImg == None else sceneFaceImg
     	A = cv2.resize(userFaceImg.copy(), (psize,psize))

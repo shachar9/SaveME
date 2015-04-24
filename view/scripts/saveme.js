@@ -115,7 +115,7 @@ function loadPlayer() {
 			}).jPlayer("load");
 			var click = document.ontouchstart === undefined ? 'click' : 'touchstart';
 			var kickoff = function () {
-				$("#jplayer_1").jPlayer("play");
+				$("#jplayer_1").jPlayer("load");
 				document.documentElement.removeEventListener(click, kickoff, true);
 			};
 			document.documentElement.addEventListener(click, kickoff, true);
